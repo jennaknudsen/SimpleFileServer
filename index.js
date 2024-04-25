@@ -10,6 +10,11 @@ const port = process.env.PORT;
 app.use(express.static(static_directory));
 
 // start the express server
-const server = http.createServer(app).listen(port, () => {
-    console.log(`HTTPS listening on port ${port}`);
+const server = http.createServer(app).listen(port, "0.0.0.0", () => {
+    console.log(`HTTP listening on port ${port}`);
+});
+
+// Need to do this for some reason otherwise the whole app breaks
+app.get('/test', function (req, res) {
+  res.send("Response");
 });
