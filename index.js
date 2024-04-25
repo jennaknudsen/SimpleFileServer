@@ -3,14 +3,15 @@ const http = require('http');
 const app = express();
 require('dotenv').config();
 
-const static_directory = process.env.STATIC_DIRECTORY;
+const video_static_directory = process.env.VIDEO_STATIC_DIRECTORY;
 const port = process.env.PORT;
 
-// use the static directory to serve static html files
-app.use(express.static(static_directory));
+// use the static directory to serve static files
+app.use("/", express.static("static/"));
+app.use("/videos", express.static(video_static_directory));
 
 // start the express server
-const server = http.createServer(app).listen(port, "0.0.0.0", () => {
+const server = http.createServer(app).listen(port, () => {
     console.log(`HTTP listening on port ${port}`);
 });
 
